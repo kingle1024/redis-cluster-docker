@@ -1,9 +1,14 @@
 #!/bin/bash
 
 # Redis 인스턴스 실행 (마스터)
-redis-server --port 6379 --cluster-enabled yes --cluster-config-file /data/nodes-6379.conf --cluster-node-timeout 5000 &
-redis-server --port 6380 --cluster-enabled yes --cluster-config-file /data/nodes-6380.conf --cluster-node-timeout 5000 &
-redis-server --port 6381 --cluster-enabled yes --cluster-config-file /data/nodes-6381.conf --cluster-node-timeout 5000 &
+for port in 6379 6380 6381; do
+  redis-server --port $port --cluster-enabled yes --cluster-config-file /data/nodes-$port.conf --cluster-node-timeout 5000 &
+done
+
+# Redis 인스턴스 실행 (레플리카)
+for port in 6382 6383 6384; do
+  redis-server --port $port --cluster-enabled yes --cluster-config-file /data/nodes-$port.conf --cluster-node-timeout 5000 --slaveof 127.0.0.1 $((port - 3)) &
+done
 
 # 모든 Redis 인스턴스가 실행될 때까지 대기
 sleep 5
