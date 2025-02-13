@@ -11,5 +11,8 @@ RUN chmod 777 /data
 COPY start-redis-cluster.sh /usr/local/bin/start-redis-cluster.sh
 RUN chmod +x /usr/local/bin/start-redis-cluster.sh
 
+# 루트 사용자로 Redis 실행
+USER root
+
 # 스크립트를 실행하여 Redis 인스턴스를 시작
 CMD ["/usr/local/bin/start-redis-cluster.sh"]
