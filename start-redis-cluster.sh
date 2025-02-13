@@ -7,7 +7,7 @@ done
 
 # Redis 인스턴스 실행 (레플리카)
 for port in 6382 6383 6384; do
-  redis-server --port $port --cluster-enabled yes --cluster-config-file /data/nodes-$port.conf --cluster-node-timeout 5000 --slaveof 127.0.0.1 $((port - 3)) &
+  redis-server --port $port --cluster-enabled yes --cluster-config-file /data/nodes-$port.conf --cluster-node-timeout 5000 &
 done
 
 # 모든 Redis 인스턴스가 실행될 때까지 대기
