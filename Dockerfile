@@ -1,8 +1,8 @@
 # Redis의 공식 이미지 사용
 FROM redis:latest
 
-# /data 디렉토리 생성
-RUN mkdir /data
+# /data 디렉토리가 존재하지 않는 경우에만 생성
+RUN [ ! -d /data ] && mkdir /data
 
 # Redis 프로세스가 사용할 수 있도록 /data 디렉토리의 권한을 변경
 RUN chmod 777 /data
