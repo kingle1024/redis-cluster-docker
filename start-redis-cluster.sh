@@ -13,7 +13,7 @@ redis-cli --cluster create \
 127.0.0.1:6379 \
 127.0.0.1:6380 \
 127.0.0.1:6381 \
---cluster-replicas 0
+--cluster-replicas 1
 
 # 모든 Redis 인스턴스가 실행될 때까지 대기
 wait
