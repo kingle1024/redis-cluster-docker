@@ -6,4 +6,14 @@ redis-server --port 6380 --cluster-enabled yes --cluster-config-file /data/nodes
 redis-server --port 6381 --cluster-enabled yes --cluster-config-file /data/nodes-6381.conf --cluster-node-timeout 5000 &
 
 # 모든 Redis 인스턴스가 실행될 때까지 대기
+sleep 5
+
+# 클러스터 구성
+redis-cli --cluster create \
+127.0.0.1:6379 \
+127.0.0.1:6380 \
+127.0.0.1:6381 \
+--cluster-replicas 0
+
+# 모든 Redis 인스턴스가 실행될 때까지 대기
 wait
