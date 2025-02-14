@@ -11,6 +11,12 @@ RUN chmod 777 /data
 COPY start-redis-cluster.sh /usr/local/bin/start-redis-cluster.sh
 RUN chmod +x /usr/local/bin/start-redis-cluster.sh
 
+# Redis 설정 파일 복사
+COPY redis.conf /usr/local/etc/redis/redis.conf
+
+# 포트 노출
+EXPOSE 6379 6380 6381 6382
+
 # 루트 사용자로 Redis 실행
 USER root
 
